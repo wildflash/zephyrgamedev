@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="800" height="480"
+	layout="absolute"
+	preloader="com.zephyr.game.preloader.HorizonPreloader"
+	applicationComplete="init()"
+	>
+	<mx:states>
+		<mx:State name="menu"/>
+		<mx:State name="game"/>
+		<mx:State name="pause"/>
+		<mx:State name="credits"/>
+		<mx:State name="howtoplay"/>
+	</mx:states>
+<mx:Script>
+	<![CDATA[
+		import com.zephyr.game.score.GameScore;
+	
+	private function init():void {
+		GameScore.getInstance()
+	}
+		
+	]]>
+</mx:Script>
+	<mx:Image x="0" y="0" source="@Embed(source=&quot;../assets/joker.png&quot;)"/>
+	<mx:Image x="0" y="0" source="@Embed(source=&quot;../assets/joker.png&quot;)"/>
+	
+</mx:Application>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties version="1">
+  <includeClasses>
+    <classEntry path="com.zephyr.game.score.GameScore"/>
+    <classEntry path="com.zephyr.game.score.ScoreEvent"/>
+    <classEntry path="com.zephyr.utils.Preloader"/>
+    <classEntry path="shared"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
