@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="480">
+	<mx:states>
+		<mx:State name="robot"/>
+		<mx:State name="magician"/>
+		<mx:State name="knight"/>
+		<mx:State name="warrior"/>
+		<mx:State name="shinobi"/>
+		<mx:State name="human"/>
+	</mx:states>
+	
+</mx:Canvas>

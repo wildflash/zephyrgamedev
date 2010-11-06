@@ -4,9 +4,20 @@
 	layout="absolute"
 	preloader="com.zephyr.game.preloader.StrongholdPreloader"
 	applicationComplete="init()">
+	<mx:states>
+		<mx:State name="menu"/>
+		<mx:State name="game"/>
+		<mx:State name="pause"/>
+		<mx:State name="credits"/>
+		<mx:State name="howtoplay"/>
+	</mx:states>
 
 <mx:Script>
 	<![CDATA[
+		
+		private function init():void {
+			
+		}
 		
 	]]>
 </mx:Script>
