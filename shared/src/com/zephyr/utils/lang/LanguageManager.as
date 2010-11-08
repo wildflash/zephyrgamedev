@@ -9,6 +9,10 @@ package com.zephyr.utils.lang {
 		private var langController:LanguageController;
 		private var langData:LanguageData;
 		
+		private var langObj:Object; //languages object
+		private var defaultLanguage:String;
+		private var selectedLanguage:String;
+		
 		public function LanguageManager():void {
 			if(instance) {
 				throw new Error("It is a Singleton and can only be accessed through Singleton.getInstance()");
@@ -21,7 +25,20 @@ package com.zephyr.utils.lang {
 		
 		public function init(langData:LanguageData):void {
 			this.langData = langData;
-			langController.init();
+			this.langObj = LanguageXMLtoObject.convert(this.langData.languagesXml);
+			this.defaultLanguage = this.langData.defaultLanguage;
+			this.selectedLanguage = this.defaultLanguage;
+			
+			langController = new LanguageController();
+			langController.init(this.langObj.availableLanguages);
+		}
+		
+		public function getLangStr(id:int):String {
+			if(this.langObj.data[id]) {
+				return this.langObj.data[id][this.selectedLanguage];
+			} else {
+				throw new Error("Data with provided id not defined!");
+			}
 		}
 		
 	}

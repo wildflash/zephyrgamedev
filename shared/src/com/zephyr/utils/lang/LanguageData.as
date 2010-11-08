@@ -5,24 +5,24 @@ package com.zephyr.utils.lang {
 	*/
 	public class LanguageData {
 		
-		public const USE_INTERNAL_XML:int = 0;
-		public const USE_EXTERNAL_XML:int = 1;
+		public const USE_INTERNAL_XML:Boolean = false;
+		public const USE_EXTERNAL_XML:Boolean = true;
 		
 		public var availableLanguages:Array; //array of available language
-		private var languagesXml:XML;
+		public var languagesXml:XML;
+		public var defaultLanguage:String;
+		private var sourceData:Boolean;
 		
-		public function LanguageData():void {
-			
+		public function LanguageData(src:Boolean=USE_INTERNAL_XML, url:String=null):void {
+			this.sourceData = src;
+			if(src==USE_EXTERNAL_XML) {
+				parseXML(url)
+			}
 		}
 		
-		//parse language data from xml in as3
-		private function parseData1():void {
-			
-		}
-		
-		//parse language data from external xml
-		private function parseData2():void {
-			
+		private function parseXML(url:String):void {
+			//parse language data from external xml
+			//take and load xml from url
 		}
 
 	}

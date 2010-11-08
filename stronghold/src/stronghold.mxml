@@ -14,9 +14,15 @@
 
 <mx:Script>
 	<![CDATA[
+		import com.zephyr.game.lang.StrongholdLanguageData;
+		import com.zephyr.utils.lang.LanguageManager;
+		import com.zephyr.utils.lang.LanguageXMLtoObject;
+		
+		public var lm:LanguageManager = LanguageManager.getInstance();
 		
 		private function init():void {
-			
+			lm.init(new StrongholdLanguageData);
+			//trace(lm.getLangStr(4));
 		}
 		
 	]]>

@@ -1,6 +1,6 @@
 package com.zephyr.utils.lang {
 	/*
-	bind this to language selector component
+	bind this to language-selector-component
 	*/
 	import flash.events.EventDispatcher;
 
@@ -10,7 +10,7 @@ package com.zephyr.utils.lang {
 			
 		}
 		
-		public function init():void {
+		public function init(availableLanguages:Array):void {
 			
 		}
 		
