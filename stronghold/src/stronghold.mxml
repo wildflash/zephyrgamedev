@@ -3,26 +3,160 @@
 	width="800" height="480"
 	layout="absolute"
 	preloader="com.zephyr.game.preloader.StrongholdPreloader"
-	applicationComplete="init()">
+	creationComplete="init()">
 	<mx:states>
-		<mx:State name="menu"/>
+		<mx:State name="menu">
+			<mx:AddChild position="lastChild">
+				<mx:VBox x="282.5" y="281" height="199" width="235" horizontalAlign="center">
+					<mx:Button label="{lm.getLangStr(0)}" click="newGame()"/>
+					<mx:Button label="{lm.getLangStr(1)}" click="showContinueScreen()"/>
+					<mx:Button label="{lm.getLangStr(2)}" click="showAchievementScreen()"/>
+					<mx:Button label="{lm.getLangStr(3)}" click="showHowToPlayScreen()"/>
+					<mx:Button label="{lm.getLangStr(4)}" click="showSettingScreen()"/>
+					<mx:Button label="{lm.getLangStr(5)}" click="showCreditsScreen()"/>
+				</mx:VBox>
+			</mx:AddChild>
+		</mx:State>
 		<mx:State name="game"/>
-		<mx:State name="pause"/>
 		<mx:State name="credits"/>
 		<mx:State name="howtoplay"/>
+		<mx:State name="intro">
+			<mx:AddChild position="lastChild">
+				<mx:Label x="96.5" y="452" text="{lm.getLangStr(6)}" width="607" textAlign="center"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="select language">
+			<mx:AddChild position="lastChild">
+				<mx:Label x="314.5" y="50" text="Select Language" color="#000000" fontFamily="Verdana" fontSize="20"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:VBox x="264.5" y="119" height="269" width="271" id="langButtonsContainer" horizontalAlign="center" verticalAlign="middle">
+				</mx:VBox>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Label x="297.5" y="452" text="You can also change language later"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="continue"/>
+		<mx:State name="achievement"/>
+		<mx:State name="setting">
+			<mx:AddChild position="lastChild">
+				<mx:Label x="259.5" y="54" text="{lm.getLangStr(4)}" color="#000000" fontFamily="Verdana" fontSize="20" width="281" textAlign="center"/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:HBox x="128" y="136" width="544" height="276" horizontalAlign="center">
+					<mx:VBox height="100%" width="261" horizontalAlign="right" verticalAlign="top">
+						<mx:Label text="{lm.getLangStr(7)}"/>
+					</mx:VBox>
+					<mx:VBox height="100%" width="261">
+						<mx:ComboBox id="langComboBox" dataProvider="{lm.langObj.availableLanguages}" editable="false" change="applySelectedLanguage(event)"></mx:ComboBox>
+					</mx:VBox>
+				</mx:HBox>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Button x="331" y="448" label="{lm.getLangStr(8)}" click="showMenuScreen()"/>
+			</mx:AddChild>
+		</mx:State>
 	</mx:states>
 
 <mx:Script>
 	<![CDATA[
+		import mx.controls.Button;
 		import com.zephyr.game.lang.StrongholdLanguageData;
 		import com.zephyr.utils.lang.LanguageManager;
 		import com.zephyr.utils.lang.LanguageXMLtoObject;
 		
+		//time needed to show maker logo that part of intro, can't skip intro within this interval
+		private const LOGO_TIMER_DELAY:int = 500; //in miliseconds
+		
+		[Bindable]
 		public var lm:LanguageManager = LanguageManager.getInstance();
 		
 		private function init():void {
 			lm.init(new StrongholdLanguageData);
 			//trace(lm.getLangStr(4));
+			this.currentState = "select language";
+			this.updateByState();
+		}
+		
+		private function updateByState():void {
+			if(this.currentState=="select language") {
+				//remove language buttons
+				if(this.langButtonsContainer.numChildren>0) {
+					this.langButtonsContainer.removeAllChildren();
+				}
+				//add language buttons
+				for(var i:int=0;i<this.lm.langObj.availableLanguages.length;i++) {
+					var langBtn:Button = new Button();
+					langBtn.label = this.lm.langObj.availableLanguages[i];
+					langBtn.addEventListener(MouseEvent.CLICK, function selectLanguage(event:MouseEvent):void {
+						langBtn.removeEventListener(MouseEvent.CLICK, selectLanguage);
+						lm.selectedLanguage = Button(event.target).label;
+						currentState = "intro";
+						updateByState();
+					});
+					this.langButtonsContainer.addChild(langBtn);
+				}
+			} else if(this.currentState=="intro") {
+				var t:Timer = new Timer(LOGO_TIMER_DELAY,1);
+				t.addEventListener(TimerEvent.TIMER_COMPLETE, function canshowMenuScreen(event:TimerEvent):void {
+					addEventListener(MouseEvent.CLICK, showMenuScreen);
+					//add listener for any key pressed & intro movie complete
+				});
+				t.start();
+			} else if(this.currentState=="play") {
+				
+			} else if(this.currentState=="continue") {
+				
+			} else if(this.currentState=="achievement") {
+				
+			} else if(this.currentState=="howtoplay") {
+				
+			} else if(this.currentState=="setting") {
+				
+			} else if(this.currentState=="credits") {
+				
+			}
+		}
+		
+		private function showMenuScreen(event:Event=null):void {
+			this.removeEventListener(MouseEvent.CLICK, showMenuScreen);
+			//remove other listeners
+			this.currentState = "menu";
+		}
+		
+		private function newGame():void {
+			this.currentState = "game";
+			this.updateByState();
+		}
+		
+		private function showContinueScreen():void {
+			this.currentState = "game";
+			this.updateByState();
+		}
+		
+		private function showAchievementScreen():void {
+			this.currentState = "game";
+			this.updateByState();
+		}
+		
+		private function showHowToPlayScreen():void {
+			this.currentState = "game";
+			this.updateByState();
+		}
+		
+		private function showSettingScreen():void {
+			this.currentState = "setting";
+			this.updateByState();
+		}
+		
+		private function showCreditsScreen():void {
+			this.currentState = "game";
+			this.updateByState();
+		}
+		
+		private function applySelectedLanguage(event:Event):void {
+			this.lm.selectedLanguage = event.target.selectedItem;
 		}
 		
 	]]>

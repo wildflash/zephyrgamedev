@@ -9,9 +9,11 @@ package com.zephyr.utils.lang {
 		private var langController:LanguageController;
 		private var langData:LanguageData;
 		
-		private var langObj:Object; //languages object
+		[Bindable]
+		public var langObj:Object; //languages object
 		private var defaultLanguage:String;
-		private var selectedLanguage:String;
+		[Bindable]
+		public var selectedLanguage:String;
 		
 		public function LanguageManager():void {
 			if(instance) {
@@ -33,11 +35,13 @@ package com.zephyr.utils.lang {
 			langController.init(this.langObj.availableLanguages);
 		}
 		
+		[Bindable]
 		public function getLangStr(id:int):String {
 			if(this.langObj.data[id]) {
 				return this.langObj.data[id][this.selectedLanguage];
 			} else {
 				throw new Error("Data with provided id not defined!");
+				return null;
 			}
 		}
 		
