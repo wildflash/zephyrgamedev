@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties version="1">
+  <includeClasses>
+    <classEntry path="com.actionsnippet.geom.Pnt"/>
+    <classEntry path="com.actionsnippet.geom.Triangulate"/>
+    <classEntry path="com.actionsnippet.qbox.QuickBox2D"/>
+    <classEntry path="com.actionsnippet.qbox.QuickContacts"/>
+    <classEntry path="com.actionsnippet.qbox.QuickObject"/>
+    <classEntry path="com.actionsnippet.qbox.objects.BoxObject"/>
+    <classEntry path="com.actionsnippet.qbox.objects.CircleObject"/>
+    <classEntry path="com.actionsnippet.qbox.objects.GroupObject"/>
+    <classEntry path="com.actionsnippet.qbox.objects.JointObject"/>
+    <classEntry path="com.actionsnippet.qbox.objects.PolyObject"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
