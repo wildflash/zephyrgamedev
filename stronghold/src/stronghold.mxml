@@ -3,7 +3,7 @@
 	width="800" height="480"
 	layout="absolute"
 	preloader="com.zephyr.game.preloader.StrongholdPreloader"
-	creationComplete="init()">
+	creationComplete="init(true)">
 	<mx:states>
 		<mx:State name="menu">
 			<mx:AddChild position="lastChild">
@@ -54,13 +54,16 @@
 				</mx:HBox>
 			</mx:AddChild>
 			<mx:AddChild position="lastChild">
-				<mx:Button x="331" y="448" label="{lm.getLangStr(8)}" click="showMenuScreen()"/>
+				<mx:VBox x="296" y="420" height="50" width="208" horizontalAlign="center" verticalAlign="bottom">
+					<mx:Button label="{lm.getLangStr(8)}" click="showMenuScreen()" height="23"/>
+				</mx:VBox>
 			</mx:AddChild>
 		</mx:State>
 	</mx:states>
 
 <mx:Script>
 	<![CDATA[
+		import com.zephyr.utils.debug.CMemoryAndFps;
 		import mx.controls.Button;
 		import com.zephyr.game.lang.StrongholdLanguageData;
 		import com.zephyr.utils.lang.LanguageManager;
@@ -72,7 +75,11 @@
 		[Bindable]
 		public var lm:LanguageManager = LanguageManager.getInstance();
 		
-		private function init():void {
+		private function init(debug:Boolean=false):void {
+			if(debug) {
+				this.rawChildren.addChild(new CMemoryAndFps());
+			}
+			
 			lm.init(new StrongholdLanguageData);
 			//trace(lm.getLangStr(4));
 			this.currentState = "select language";
