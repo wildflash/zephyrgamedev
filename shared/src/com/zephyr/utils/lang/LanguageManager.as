@@ -1,10 +1,12 @@
 package com.zephyr.utils.lang {
 	
 	import flash.events.EventDispatcher;
-
+	
 	public class LanguageManager extends EventDispatcher {
 		
 		private static var instance:LanguageManager = new LanguageManager();
+		
+		public static const LANGUAGE_CHANGED:String = "languageChanged";
 		
 		private var langController:LanguageController;
 		private var langData:LanguageData;
@@ -35,7 +37,7 @@ package com.zephyr.utils.lang {
 			langController.init(this.langObj.availableLanguages);
 		}
 		
-		[Bindable]
+		[Bindable(event="languageChanged")]
 		public function getLangStr(id:int):String {
 			if(this.langObj.data[id]) {
 				return this.langObj.data[id][this.selectedLanguage];

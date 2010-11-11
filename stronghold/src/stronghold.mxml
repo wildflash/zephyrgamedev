@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
 	width="800" height="480"
+	frameRate="60"
 	layout="absolute"
 	preloader="com.zephyr.game.preloader.StrongholdPreloader"
-	creationComplete="init(true)">
+	creationComplete="init(true)" xmlns:ns1="com.zephyr.game.*">
 	<mx:states>
 		<mx:State name="menu">
 			<mx:AddChild position="lastChild">
@@ -17,7 +18,12 @@
 				</mx:VBox>
 			</mx:AddChild>
 		</mx:State>
-		<mx:State name="game"/>
+		<mx:State name="game">
+			<mx:AddChild position="lastChild">
+				<ns1:GameScreen horizontalCenter="0" verticalCenter="0">
+				</ns1:GameScreen>
+			</mx:AddChild>
+		</mx:State>
 		<mx:State name="credits"/>
 		<mx:State name="howtoplay"/>
 		<mx:State name="intro">
@@ -49,7 +55,7 @@
 						<mx:Label text="{lm.getLangStr(7)}"/>
 					</mx:VBox>
 					<mx:VBox height="100%" width="261">
-						<mx:ComboBox id="langComboBox" dataProvider="{lm.langObj.availableLanguages}" editable="false" change="applySelectedLanguage(event)"></mx:ComboBox>
+						<mx:ComboBox id="langComboBox" dataProvider="{lm.langObj.availableLanguages}" editable="false" change="applySelectedLanguage(event)" selectedIndex="{lm.langObj.availableLanguages.indexOf(lm.selectedLanguage)}"></mx:ComboBox>
 					</mx:VBox>
 				</mx:HBox>
 			</mx:AddChild>
@@ -164,6 +170,7 @@
 		
 		private function applySelectedLanguage(event:Event):void {
 			this.lm.selectedLanguage = event.target.selectedItem;
+			this.lm.dispatchEvent(new Event(LanguageManager.LANGUAGE_CHANGED));
 		}
 		
 	]]>

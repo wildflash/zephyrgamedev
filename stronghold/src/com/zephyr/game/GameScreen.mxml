@@ -8,5 +8,10 @@
 		<mx:State name="shinobi"/>
 		<mx:State name="human"/>
 	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			
+		]]>
+	</mx:Script>
 	
 </mx:Canvas>
