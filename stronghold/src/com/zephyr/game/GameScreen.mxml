@@ -10,8 +10,29 @@
 	</mx:states>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.game.fx.Explosion;
+			
+			public function init():void {
+				explosionTest();
+			}
+			
+			private function explosionTest():void {
+				var explosionCount:int = 0;
+				var t:Timer = new Timer(1000);
+				t.addEventListener(TimerEvent.TIMER, function (event:TimerEvent):void {
+					explosionCount++;
+					if(explosionCount>500) return;
+					for(var i:int=0;i<5;i++) {
+					var expX:Number = Math.random()*parentApplication.width;
+					var expY:Number = Math.random()*parentApplication.height;
+					var tempExp:Explosion = new Explosion(expX, expY, Explosion.NONE);
+					rawChildren.addChild(tempExp);}
+				});
+				t.start();
+			}
 			
 		]]>
 	</mx:Script>
+	<mx:Label x="360.5" y="452" text="Game Screen"/>
 	
 </mx:Canvas>

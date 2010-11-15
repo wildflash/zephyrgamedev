@@ -20,7 +20,7 @@
 		</mx:State>
 		<mx:State name="game">
 			<mx:AddChild position="lastChild">
-				<ns1:GameScreen horizontalCenter="0" verticalCenter="0">
+				<ns1:GameScreen id="gameScreen" horizontalCenter="0" verticalCenter="0">
 				</ns1:GameScreen>
 			</mx:AddChild>
 		</mx:State>
@@ -69,6 +69,7 @@
 
 <mx:Script>
 	<![CDATA[
+		import com.zephyr.game.GameScreen;
 		import com.zephyr.utils.debug.CMemoryAndFps;
 		import mx.controls.Button;
 		import com.zephyr.game.lang.StrongholdLanguageData;
@@ -88,7 +89,8 @@
 			
 			lm.init(new StrongholdLanguageData);
 			//trace(lm.getLangStr(4));
-			this.currentState = "select language";
+			//this.currentState = "select language";
+			this.currentState = "game";
 			this.updateByState();
 		}
 		
@@ -117,8 +119,8 @@
 					//add listener for any key pressed & intro movie complete
 				});
 				t.start();
-			} else if(this.currentState=="play") {
-				
+			} else if(this.currentState=="game") {
+				this.gameScreen.init();
 			} else if(this.currentState=="continue") {
 				
 			} else if(this.currentState=="achievement") {
