@@ -8,11 +8,8 @@ main code & asset extracted from: http://www.freeactionscript.com (by Philip Rad
 package com.zephyr.game.fx {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.geom.ColorTransform;
 	
-	import mx.automation.codec.ColorPropertyCodec;
-	
-	public class Explosion extends Sprite{
+	public class Explosion extends Sprite {
 		
 		public static const NONE:int = 0;
 		public static const TINY_EXPLOSION:int = 1;
@@ -32,48 +29,73 @@ package com.zephyr.game.fx {
 		private var explosionDistance:Number = 30;
 		private var explosionSize:Number = 1;
 		private var explosionAlpha:Number = .75;
+		private var explosionFragmentsOn:Boolean = true;
 		
 		//array of movieClips
-		private var tempClip:Array = []; //explosion mc
-		private var tempClip2:Array = []; //particle mc
+		private var tempFragments:Array = []; //particle fragments mc
+		private var tempExplosion:Array = []; //explosion mc
 		
-		public function Explosion(xPos:Number, yPos:Number, preset:int=0):void {
+		private var targetDisplay:Object;
+		private var xPos:Number;
+		private var yPos:Number;
+		private var shockwave:Shockwave;
+		
+		public function Explosion(targetDisplay:Object, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true):void {
+			this.targetDisplay = targetDisplay;
+			this.xPos = xPos;
+			this.yPos = yPos;
+			targetDisplay.addChild(this);
 			setPreset(preset);
+			this.explosionFragmentsOn = explosionFragmentsOn;
+			//playShockwave();
 			
 			//run a for loop based on the amount of explosion particles
 			for(var i:int=0; i < explosionParticleAmount; i++) {
-				//create particle
-				tempClip2[i] = new ExplosionMc() as MovieClip;
-				tempClip[i] = new ParticleMc() as MovieClip;
-				this.addChild(tempClip2[i]);
-				this.addChild(tempClip[i]);
+				var randomNum:Number
+				
+				////create explosion bulb
+				tempExplosion[i] = new ExplosionMc() as MovieClip;
+				this.addChild(tempExplosion[i]);
 				if(i==explosionParticleAmount-1) {
-					tempClip2[i].addFrameScript(tempClip2[i].totalFrames-1, destroy);
+					tempExplosion[i].addFrameScript(tempExplosion[i].totalFrames-1, destroy);
 				}
-				//set particle position
-				tempClip[i].x = xPos + Math.random()*explosionDistance - (explosionDistance/2);
-				tempClip[i].y = yPos + Math.random()*explosionDistance - (explosionDistance/2);		
-				tempClip2[i].x = xPos + Math.random()*explosionDistance - (explosionDistance/2);
-				tempClip2[i].y = yPos + Math.random()*explosionDistance - (explosionDistance/2);
-				//get random particle scale
-				var randomNum:Number = Math.random()*explosionSize + (explosionSize/2);
-				//set particle scale
-				tempClip[i].scaleX = randomNum;
-				tempClip[i].scaleY = tempClip[i].scaleX;
-				//get random particle scale
+				//set position
+				tempExplosion[i].x = xPos + Math.random()*explosionDistance - (explosionDistance/2);
+				tempExplosion[i].y = yPos + Math.random()*explosionDistance - (explosionDistance/2);
+				//get random scale
 				randomNum = Math.random()*explosionSize + (explosionSize/2);
-				//set randomNum scale
-				tempClip2[i].scaleX = randomNum;
-				tempClip2[i].scaleY = tempClip2[i].scaleX;
-				//set particle rotation
+				//set scale
+				tempExplosion[i].scaleX = randomNum;
+				tempExplosion[i].scaleY = tempExplosion[i].scaleX;
+				//set rotation
 				randomNum = Math.random()*359;
-				tempClip[i].rotation = randomNum;
-				randomNum = Math.random()*359;
-				tempClip2[i].rotation = randomNum;
-				//set particle alpha
-				tempClip[i].alpha = Math.random()*explosionAlpha + explosionAlpha/4;
-				tempClip2[i].alpha = Math.random()*explosionAlpha + explosionAlpha/4;
+				tempExplosion[i].rotation = randomNum;
+				//set alpha
+				tempExplosion[i].alpha = Math.random()*explosionAlpha + explosionAlpha/4;
+				
+				if(explosionFragmentsOn) {
+					////create explosion fragments
+					tempFragments[i] = new ParticleMc() as MovieClip;
+					this.addChild(tempFragments[i]);
+					//set position
+					tempFragments[i].x = xPos + Math.random()*explosionDistance - (explosionDistance/2);
+					tempFragments[i].y = yPos + Math.random()*explosionDistance - (explosionDistance/2);
+					//get random scale
+					randomNum = Math.random()*explosionSize + (explosionSize/2);
+					//set scale
+					tempFragments[i].scaleX = randomNum;
+					tempFragments[i].scaleY = tempFragments[i].scaleX;
+					//set rotation
+					randomNum = Math.random()*359;
+					tempFragments[i].rotation = randomNum;
+					//set particle alpha
+					tempFragments[i].alpha = Math.random()*explosionAlpha + explosionAlpha/4;
+				}
 			}
+		}
+		
+		private function playShockwave():void {
+			var shockwave:Shockwave = new Shockwave(this.targetDisplay,this.xPos,this.yPos,5);
 		}
 		
 		private function setPreset(preset:int):void {
@@ -103,14 +125,19 @@ package com.zephyr.game.fx {
 		
 		private function destroy():void {
 			for(var i:int=0;i<explosionParticleAmount;i++) {
-				tempClip[i].stop();
-				this.removeChild(tempClip[i]);
-				tempClip[i] = null;
+				//delete explosion bulb
+				tempExplosion[i].stop()
+				this.removeChild(tempExplosion[i]);
+				tempExplosion[i] = null;
 				
-				tempClip2[i].stop()
-				this.removeChild(tempClip2[i]);
-				tempClip2[i] = null;
+				if(this.explosionFragmentsOn) {
+					//delete explosion fragments
+					tempFragments[i].stop();
+					this.removeChild(tempFragments[i]);
+					tempFragments[i] = null;
+				}
 			}
+			parent.removeChild(this);
 		}
 
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="480">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="480" xmlns:ns1="com.zephyr.game.*" xmlns:ns2="com.zephyr.game.components.*">
 	<mx:states>
 		<mx:State name="robot"/>
 		<mx:State name="magician"/>
@@ -12,7 +12,13 @@
 		<![CDATA[
 			import com.zephyr.game.fx.Explosion;
 			
+			private var game:Game;
+			private var gs:GameSettings = GameSettings.getInstance();
+			
 			public function init():void {
+				GameData.getInstance().levelNo = 1; //place this elsewhere
+				game = new Game(GameData.getInstance());
+				this.gameArea.init(GameData.getInstance().level.initialData);
 				explosionTest();
 			}
 			
@@ -23,16 +29,21 @@
 					explosionCount++;
 					if(explosionCount>500) return;
 					for(var i:int=0;i<5;i++) {
-					var expX:Number = Math.random()*parentApplication.width;
-					var expY:Number = Math.random()*parentApplication.height;
-					var tempExp:Explosion = new Explosion(expX, expY, Explosion.NONE);
-					rawChildren.addChild(tempExp);}
+						var expX:Number = Math.random()*gameArea.width;
+						var expY:Number = Math.random()*gameArea.height;
+						var tempExp:Explosion = new Explosion(gameArea.gameMc, expX, expY, Explosion.MEDIUM_EXPLOSION);
+					}
 				});
 				t.start();
 			}
 			
 		]]>
 	</mx:Script>
-	<mx:Label x="360.5" y="452" text="Game Screen"/>
+	<!--<mx:Image x="0" y="0" width="100%" height="100%" source="@Embed(source=&quot;../../../../assets/bitmap/desert_sands.jpg&quot;)" scaleContent="false"/>-->
+	<mx:Label text="Game Screen" verticalCenter="0" horizontalCenter="0"/>
+	<ns2:GameArea top="0" horizontalCenter="0" id="gameArea">
+	</ns2:GameArea>
+	<ns2:GameBar bottom="0" horizontalCenter="0" id="gameBar">
+	</ns2:GameBar>
 	
 </mx:Canvas>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="100">
+	<mx:Label text="Game Bar" verticalCenter="0" horizontalCenter="0"/>
+	
+</mx:Canvas>

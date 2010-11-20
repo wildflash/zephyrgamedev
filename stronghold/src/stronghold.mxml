@@ -19,7 +19,7 @@
 			</mx:AddChild>
 		</mx:State>
 		<mx:State name="game">
-			<mx:AddChild position="lastChild">
+			<mx:AddChild position="lastChild" creationPolicy="all">
 				<ns1:GameScreen id="gameScreen" horizontalCenter="0" verticalCenter="0">
 				</ns1:GameScreen>
 			</mx:AddChild>
