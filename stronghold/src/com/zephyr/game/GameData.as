@@ -2,6 +2,7 @@ package com.zephyr.game {
 	
 	import com.zephyr.game.levels.ILevel;
 	import com.zephyr.game.levels.LevelManager;
+	
 	import flash.events.EventDispatcher;
 	
 	public class GameData extends EventDispatcher{

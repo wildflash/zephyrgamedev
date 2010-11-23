@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="480" xmlns:ns1="com.zephyr.game.*" xmlns:ns2="com.zephyr.game.components.*">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="480" xmlns:ns1="com.zephyr.game.*" xmlns:ns2="com.zephyr.game.components.*" xmlns:ns3="com.zephyr.utils.debug.*">
 	<mx:states>
 		<mx:State name="robot"/>
 		<mx:State name="magician"/>
@@ -10,6 +10,8 @@
 	</mx:states>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.game.fx.Shockwave;
+			import com.zephyr.game.fx.FxManager;
 			import com.zephyr.game.fx.Explosion;
 			
 			private var game:Game;
@@ -17,9 +19,8 @@
 			
 			public function init():void {
 				GameData.getInstance().levelNo = 1; //place this elsewhere
-				game = new Game(GameData.getInstance());
-				this.gameArea.init(GameData.getInstance().level.initialData);
-				explosionTest();
+				game = new Game(this, GameData.getInstance());
+				explosionTest2();
 			}
 			
 			private function explosionTest():void {
@@ -31,7 +32,27 @@
 					for(var i:int=0;i<5;i++) {
 						var expX:Number = Math.random()*gameArea.width;
 						var expY:Number = Math.random()*gameArea.height;
-						var tempExp:Explosion = new Explosion(gameArea.gameMc, expX, expY, Explosion.MEDIUM_EXPLOSION);
+						var tempExp:Explosion = new Explosion(game, gameArea.fxMc, expX, expY, Explosion.MEDIUM_EXPLOSION, true, true, true);
+					}
+				});
+				t.start();
+			}
+			
+			private function explosionTest2():void {
+				var fxm:FxManager = FxManager.getInstance();
+				//var tempExp:Explosion = new Explosion(game, gameArea.fxMc, 200, 200, Explosion.MEDIUM_EXPLOSION, true, true, true);
+				
+				var explosionCount:int = 0;
+				var t:Timer = new Timer(1000);
+				t.addEventListener(TimerEvent.TIMER, function (event:TimerEvent):void {
+					explosionCount++;
+					if(explosionCount>500) return;
+					for(var i:int=0;i<5;i++) {
+						var expX:Number = Math.random()*gameArea.width;
+						var expY:Number = Math.random()*gameArea.height;
+						//var tempExp:Explosion = new Explosion(game, gameArea.fxMc, expX, expY, Explosion.MEDIUM_EXPLOSION, true, true, true);
+						var tempExp:Shockwave = new Shockwave(game, gameArea, expX, expY, 15);
+						fxm.addFx(tempExp);
 					}
 				});
 				t.start();
@@ -45,5 +66,8 @@
 	</ns2:GameArea>
 	<ns2:GameBar bottom="0" horizontalCenter="0" id="gameBar">
 	</ns2:GameBar>
+	<mx:Button x="98" y="423" label="Button" click="game.pause()"/>
+	<ns3:DebugBox x="10" y="10">
+	</ns3:DebugBox>
 	
 </mx:Canvas>

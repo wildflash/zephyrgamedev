@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="380">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="380" xmlns:ns1="com.zephyr.utils.debug.*">
 	<!--<mx:Image x="0" y="0" width="100%" height="100%" id="bg" scaleContent="false" autoLoad="true"/>-->
 	<mx:Label text="Game Area" verticalCenter="0" horizontalCenter="0"/>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.utils.debug.CMemoryAndFps;
 			import com.zephyr.game.GameData;
 			
 			private var levelData:Object;
+			public var gameMc:MovieClip = new MovieClip();
+			public var bgMc:MovieClip = new MovieClip();
+			public var fxMc:MovieClip = new MovieClip();
 			
 			public function init(levelData:Object):void {
 				this.levelData = levelData;
+				gameMc.addChild(bgMc);
+				gameMc.addChild(fxMc);
+				this.rawChildren.addChild(gameMc);
 				draw();
 			}
 			
@@ -19,16 +26,16 @@
 			public function draw():void {
 				//put background
 				//gameMc.source = levelData.playerArea.bg;
-				gameMc.addChild(levelData.playerArea.bg);
+				bgMc.addChild(levelData.playerArea.bg);
 				
 				//put game objects
 				for each(var go:Sprite in levelData.playerArea.gameObjects) {
-					gameMc.addChild(go);
+					bgMc.addChild(go);
 				}
 			}
 			
 		]]>
 	</mx:Script>
-	<mx:SWFLoader x="0" y="0" width="100%" height="100%" id="gameMc" scaleContent="false"/>
+	<!--<mx:SWFLoader x="0" y="0" width="100%" height="100%" id="gameMc" scaleContent="false"/>-->
 	
 </mx:Canvas>

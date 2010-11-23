@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="60" height="30" creationComplete="init()" backgroundColor="#FFFFFF" backgroundAlpha="1.0" borderStyle="solid" borderThickness="1" borderColor="#002AFF">
+	<mx:Script>
+		<![CDATA[
+			
+			private function init():void {
+				this.rawChildren.addChild(new CMemoryAndFps());
+			}
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>
