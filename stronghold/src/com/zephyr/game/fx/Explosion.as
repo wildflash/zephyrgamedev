@@ -42,9 +42,8 @@ package com.zephyr.game.fx {
 		private var xPos:Number;
 		private var yPos:Number;
 		private var useStepFunction:Boolean;
-		private var shockwave:Shockwave;
 		
-		public function Explosion(game:Game, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, shockwaveOn:Boolean=true, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=false):void {
+		public function Explosion(game:Game, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=true):void {
 			this.targetDisplay = targetDisplay;
 			this.xPos = xPos;
 			this.yPos = yPos;
@@ -54,7 +53,6 @@ package com.zephyr.game.fx {
 			this.explosionFragmentsOn = explosionFragmentsOn;
 			super(game);
 			
-			//addShockwave();
 			addExplosion();
 		}
 		
@@ -96,6 +94,7 @@ package com.zephyr.game.fx {
 				}
 				this.addChild(tempExplosion[i]);
 				if(i==explosionParticleAmount-1) {
+					this.dispatchEvent(new FxEvent(FxEvent.PLAY_COMPLETED,null));
 					tempExplosion[i].addFrameScript(tempExplosion[i].totalFrames-1, destroy);
 					/*tempExplosion[i].addFrameScript(tempExplosion[i].totalFrames-1, function ():void {
 						dispatchEvent(new FxEvent(FxEvent.PLAY_COMPLETED, destroy));
@@ -139,11 +138,6 @@ package com.zephyr.game.fx {
 			}
 		}
 		
-		private function addShockwave():void {
-			var shockwave:Shockwave = new Shockwave(this.game, this.game.gameScreen.gameArea.bgMc,this.xPos,this.yPos,50);
-			//var shockwave:Shockwave = new Shockwave(this,0,0,5);
-		}
-		
 		override public function step(event:GameEvent):void {
 			for(var i:int=0;i<explosionParticleAmount;i++) {
 				if(tempExplosion[i]) tempExplosion[i].nextFrame();
@@ -155,6 +149,7 @@ package com.zephyr.game.fx {
 		}
 		
 		override public function destroy():void {
+			this.game.removeEventListener(GameEvent.STEP, step);
 			for(var i:int=0;i<explosionParticleAmount;i++) {
 				//delete explosion bulb
 				tempExplosion[i].stop()

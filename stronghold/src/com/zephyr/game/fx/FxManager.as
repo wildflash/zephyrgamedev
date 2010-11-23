@@ -25,9 +25,6 @@ package com.zephyr.game.fx
 		
 		public function addFx(fx:IFx):void {
 			fxArray.addItem(fx);
-			if(fx is GameShaderFilterFx) {
-				
-			}
 		}
 		
 		public function removeFx(event:FxEvent):void {

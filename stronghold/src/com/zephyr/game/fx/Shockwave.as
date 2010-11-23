@@ -25,30 +25,6 @@ package com.zephyr.game.fx {
 			
 			shockwaveShader = new Shader(new ShaderAsset() as ByteArray);
 			shockwaveShader.data.position.value = [xPos,yPos];
-			//shockwaveShader.data.radius.value = [maxRadius];
-			
-			//shaderFilter = new ShaderFilter(shockwaveShader);
-			
-			//if(!targetDisplay.filters) targetDisplay.filters = [];
-			//targetDisplay.filters = [shaderFilter];
-			
-			//targetDisplay.filters.push(shaderFilter);
-			
-			//var a:ArrayCollection =  new ArrayCollection(targetDisplay.filters);
-			//a.addItem(new ShaderFilter(shockwaveShader));
-			
-			/*for(var i:int=0;i<3;i++) {
-				targetDisplay.filters.push(new GlowFilter());
-			}
-			
-			targetDisplay.filters = [new GlowFilter(),new GlowFilter(),new GlowFilter()];*/
-			
-			/*shockwaveShader.data.position.value = [200,200];
-			var f:ArrayCollection = new ArrayCollection();
-			for(var i:int=0;i<3;i++) {
-				f.addItem(new ShaderFilter(shockwaveShader));
-			}
-			targetDisplay.filters = f.source;*/
 		}
 		
 		override public function step(event:GameEvent):void {
@@ -60,17 +36,18 @@ package com.zephyr.game.fx {
 					shaderFilter = null;
 				}
 				if(radius > this.maxRadius) {
+					this.dispatchEvent(new FxEvent(FxEvent.PLAY_COMPLETED,null));
 					destroy();
 					return;
 				}
 				shockwaveShader.data.radius.value = [radius];
-				//shockwaveShader.data.position.value = [200,200];
 				shaderFilter = new ShaderFilter(shockwaveShader);
 				this.applyFilter(shaderFilter);
 			//}
 		}
 		
 		override public function destroy():void {
+			this.game.removeEventListener(GameEvent.STEP, step);
 			this.removeFxObject();
 		}
 

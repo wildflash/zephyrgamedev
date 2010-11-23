@@ -10,6 +10,7 @@
 	</mx:states>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.game.fx.Explosion2;
 			import com.zephyr.game.fx.Shockwave;
 			import com.zephyr.game.fx.FxManager;
 			import com.zephyr.game.fx.Explosion;
@@ -32,7 +33,7 @@
 					for(var i:int=0;i<5;i++) {
 						var expX:Number = Math.random()*gameArea.width;
 						var expY:Number = Math.random()*gameArea.height;
-						var tempExp:Explosion = new Explosion(game, gameArea.fxMc, expX, expY, Explosion.MEDIUM_EXPLOSION, true, true, true);
+						var tempExp:Explosion = new Explosion(game, gameArea.fxMc, expX, expY, Explosion.MEDIUM_EXPLOSION, true, true);
 					}
 				});
 				t.start();
@@ -46,12 +47,16 @@
 				var t:Timer = new Timer(1000);
 				t.addEventListener(TimerEvent.TIMER, function (event:TimerEvent):void {
 					explosionCount++;
-					if(explosionCount>500) return;
-					for(var i:int=0;i<5;i++) {
+					if(explosionCount>500) {
+						t.stop();
+						return;
+					}
+					for(var i:int=0;i<6;i++) {
 						var expX:Number = Math.random()*gameArea.width;
 						var expY:Number = Math.random()*gameArea.height;
 						//var tempExp:Explosion = new Explosion(game, gameArea.fxMc, expX, expY, Explosion.MEDIUM_EXPLOSION, true, true, true);
-						var tempExp:Shockwave = new Shockwave(game, gameArea, expX, expY, 15);
+						//var tempExp:Shockwave = new Shockwave(game, gameArea, expX, expY, 15);
+						var tempExp:Explosion2 = new Explosion2(game, gameArea.fxMc, expX, expY, Explosion.BIG_EXPLOSION, true, true);
 						fxm.addFx(tempExp);
 					}
 				});
