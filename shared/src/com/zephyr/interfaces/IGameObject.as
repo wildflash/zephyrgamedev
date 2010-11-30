@@ -1,6 +1,6 @@
-package com.zephyr.game.objects {
+package com.zephyr.interfaces {
 	
-	import com.zephyr.game.GameEvent;
+	import com.zephyr.events.GameEvent;
 	
 	public interface IGameObject {
 		

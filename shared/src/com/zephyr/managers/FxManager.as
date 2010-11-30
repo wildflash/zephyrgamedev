@@ -1,5 +1,8 @@
-package com.zephyr.game.fx
+package com.zephyr.managers
 {
+	import com.zephyr.events.FxEvent;
+	import com.zephyr.interfaces.IFx;
+	
 	import flash.events.EventDispatcher;
 	
 	import mx.collections.ArrayCollection;

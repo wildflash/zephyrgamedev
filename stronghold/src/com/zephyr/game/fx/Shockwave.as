@@ -1,6 +1,8 @@
 package com.zephyr.game.fx {
-	import com.zephyr.game.Game;
-	import com.zephyr.game.GameEvent;
+	import com.zephyr.abstracts.GameShaderFilterFx;
+	import com.zephyr.events.FxEvent;
+	import com.zephyr.events.GameEvent;
+	import com.zephyr.game.StrongholdGame;
 	
 	import flash.display.Shader;
 	import flash.display.Sprite;
@@ -17,7 +19,7 @@ package com.zephyr.game.fx {
 		private var counter:int;
 		private var radius:int;
 		
-		public function Shockwave(game:Game, targetDisplay:Sprite, xPos:Number, yPos:Number, maxRadius:Number):void {
+		public function Shockwave(game:StrongholdGame, targetDisplay:Sprite, xPos:Number, yPos:Number, maxRadius:Number):void {
 			counter = 0;
 			this.targetDisplay = targetDisplay;
 			this.maxRadius = maxRadius;

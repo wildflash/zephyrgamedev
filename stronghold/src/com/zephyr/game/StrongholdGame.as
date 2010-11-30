@@ -1,11 +1,12 @@
 package com.zephyr.game {
 	import com.actionsnippet.qbox.QuickBox2D;
+	import com.zephyr.events.GameEvent;
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
-	public class Game extends EventDispatcher {
+	public class StrongholdGame extends Game {
 		
 		public static const PAUSE_PHYSICS:Boolean = false;
 		public static const PAUSE_DAMAGE:Boolean = true;
@@ -16,7 +17,7 @@ package com.zephyr.game {
 		private var phy:QuickBox2D;
 		private var stepNo:int;
 		
-		public function Game(gameScreen:GameScreen, gameData:GameData):void {
+		public function StrongholdGame(gameScreen:GameScreen, gameData:GameData):void {
 			this.gameScreen = gameScreen;
 			this.gameData = gameData;
 			
@@ -35,8 +36,8 @@ package com.zephyr.game {
 			this.phy.start();
 		}
 		
-		public function pause(type:Boolean=Game.PAUSE_PHYSICS):void {
-			if(type==Game.PAUSE_PHYSICS) {
+		public function pause(type:Boolean=StrongholdGame.PAUSE_PHYSICS):void {
+			if(type==StrongholdGame.PAUSE_PHYSICS) {
 				this.phy.stop();
 			} else {
 				

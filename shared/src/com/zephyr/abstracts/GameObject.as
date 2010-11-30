@@ -1,6 +1,6 @@
-package com.zephyr.game.objects
+package com.zephyr.abstracts
 {
-	import com.zephyr.game.Game;
+	import com.zephyr.game.StrongholdGame;
 	import com.zephyr.game.GameEvent;
 	
 	import flash.display.Sprite;
@@ -8,9 +8,9 @@ package com.zephyr.game.objects
 	public class GameObject extends Sprite implements IGameObject
 	{
 		
-		private var game:Game;
+		private var game:StrongholdGame;
 		
-		public function GameObject(game:Game):void
+		public function GameObject(game:StrongholdGame):void
 		{
 			this.game = game;
 			this.game.addEventListener(GameEvent.STEP,step);

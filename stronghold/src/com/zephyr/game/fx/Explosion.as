@@ -6,8 +6,10 @@ main code & asset extracted from: http://www.freeactionscript.com (by Philip Rad
 */
 
 package com.zephyr.game.fx {
-	import com.zephyr.game.Game;
-	import com.zephyr.game.GameEvent;
+	import com.zephyr.abstracts.GameFx;
+	import com.zephyr.events.FxEvent;
+	import com.zephyr.events.GameEvent;
+	import com.zephyr.game.StrongholdGame;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -43,7 +45,7 @@ package com.zephyr.game.fx {
 		private var yPos:Number;
 		private var useStepFunction:Boolean;
 		
-		public function Explosion(game:Game, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=true):void {
+		public function Explosion(game:StrongholdGame, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=true):void {
 			this.targetDisplay = targetDisplay;
 			this.xPos = xPos;
 			this.yPos = yPos;

@@ -1,6 +1,7 @@
 package com.zephyr.game.objects
 {
-	import com.zephyr.game.GameEvent;
+	import com.zephyr.events.GameEvent;
+	import com.zephyr.interfaces.IGameObject;
 	
 	import flash.display.Sprite;
 	

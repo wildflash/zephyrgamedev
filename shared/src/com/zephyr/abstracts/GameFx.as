@@ -1,18 +1,21 @@
-package com.zephyr.game.fx
+package com.zephyr.abstracts
 {
-	import com.zephyr.game.Game;
-	import com.zephyr.game.GameEvent;
-	import com.zephyr.game.objects.IGameObject;
+	import com.zephyr.events.FxEvent;
+	import com.zephyr.events.GameEvent;
+	import com.zephyr.game.StrongholdGame;
+	import com.zephyr.interfaces.IFx;
+	import com.zephyr.interfaces.IGameObject;
+	import com.zephyr.managers.FxManager;
 	
 	import flash.display.Sprite;
 
 	public class GameFx extends Sprite implements IGameObject, IFx
 	{
 		
-		public var game:Game;
+		public var game:StrongholdGame;
 		public var targetDisplay:Sprite;
 		
-		public function GameFx(game:Game):void {
+		public function GameFx(game:StrongholdGame):void {
 			this.game = game;
 			this.game.addEventListener(GameEvent.STEP,step);
 			super();

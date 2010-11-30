@@ -1,6 +1,8 @@
 package com.zephyr.game.fx
 {
-	import com.zephyr.game.Game;
+	import com.zephyr.abstracts.GameFx;
+	import com.zephyr.events.FxEvent;
+	import com.zephyr.game.StrongholdGame;
 	
 	import flash.display.Sprite;
 	
@@ -19,7 +21,7 @@ package com.zephyr.game.fx
 		private var explosionFragmentsOn:Boolean = true;
 		private var useStepFunction:Boolean;
 		
-		public function Explosion2(game:Game, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=true):void {
+		public function Explosion2(game:StrongholdGame, targetDisplay:Sprite, xPos:Number, yPos:Number, preset:int=0, explosionFragmentsOn:Boolean=true, useStepFunction:Boolean=true):void {
 			this.game = game;
 			this.targetDisplay = targetDisplay;
 			this.xPos = xPos;

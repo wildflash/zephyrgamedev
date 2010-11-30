@@ -1,4 +1,4 @@
-package com.zephyr.game.fx
+package com.zephyr.interfaces
 {
 	public interface IFx
 	{
