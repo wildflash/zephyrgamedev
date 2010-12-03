@@ -1,6 +1,6 @@
 package com.zephyr.abstracts
 {
-	import com.zephyr.game.StrongholdGame;
+	import com.zephyr.game.Game;
 	
 	import flash.filters.ShaderFilter;
 	
@@ -11,7 +11,7 @@ package com.zephyr.abstracts
 		
 		public var shaderFilter:ShaderFilter;
 		
-		public function GameShaderFilterFx(game:StrongholdGame):void {
+		public function GameShaderFilterFx(game:Game):void {
 			super(game);
 		}
 		
