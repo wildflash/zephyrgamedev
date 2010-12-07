@@ -11,8 +11,7 @@ package com.zephyr.events
 		
 		public var params:Object;
 		
-		public function FxEvent(type:String, params:Object)
-		{
+		public function FxEvent(type:String, params:Object):void {
 			this.params = params;
 			super(type);
 		}

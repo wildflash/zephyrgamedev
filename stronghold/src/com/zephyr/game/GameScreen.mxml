@@ -10,18 +10,20 @@
 	</mx:states>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.events.GameTimerEvent;
 			import com.zephyr.managers.FxManager;
 			import com.zephyr.game.fx.Explosion2;
 			import com.zephyr.game.fx.Shockwave;
 			import com.zephyr.game.fx.Explosion;
 			
+			[Bindable]
 			private var game:StrongholdGame;
 			private var gs:GameSettings = GameSettings.getInstance();
 			
 			public function init():void {
 				GameData.getInstance().levelNo = 1; //place this elsewhere
 				game = new StrongholdGame(this, GameData.getInstance());
-				explosionTest();
+				//explosionTest();
 			}
 			
 			private function explosionTest():void {
@@ -29,10 +31,10 @@
 				//var tempExp:Explosion = new Explosion(game, gameArea.fxMc, 200, 200, Explosion.MEDIUM_EXPLOSION, true, true, true);
 				
 				var explosionCount:int = 0;
-				var t:Timer = new Timer(1000);
-				t.addEventListener(TimerEvent.TIMER, function (event:TimerEvent):void {
+				var t:GameTimer = new GameTimer(game, 1000);
+				t.addEventListener(GameTimerEvent.TIMER, function (event:GameTimerEvent):void {
 					explosionCount++;
-					if(explosionCount>500) {
+					if(explosionCount>15) {
 						t.stop();
 						return;
 					}
@@ -56,7 +58,7 @@
 	</ns2:GameArea>
 	<ns2:GameBar bottom="0" horizontalCenter="0" id="gameBar">
 	</ns2:GameBar>
-	<mx:Button x="98" y="423" label="Button" click="game.pause()"/>
+	<mx:Button x="10" y="350" click="{game.playState==Game.PLAY? game.pause():game.play()}" width="16" height="16" styleName="{game.playState==Game.PLAY? 'pauseButton':'playButton'}" buttonMode="true"/>
 	<ns3:DebugBox x="10" y="10">
 	</ns3:DebugBox>
 	

@@ -4,6 +4,7 @@
 	<mx:Label text="Game Area" verticalCenter="0" horizontalCenter="0"/>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.managers.DisplayManager;
 			import com.zephyr.utils.debug.CMemoryAndFps;
 			import com.zephyr.game.GameData;
 			
@@ -17,7 +18,14 @@
 				gameMc.addChild(bgMc);
 				gameMc.addChild(fxMc);
 				this.rawChildren.addChild(gameMc);
+				initDisplayManager();
 				draw();
+			}
+			
+			public function initDisplayManager():void {
+				DisplayManager.getInstance().bgLayer = bgMc;
+				DisplayManager.getInstance().fxLayer = fxMc;
+				DisplayManager.getInstance().rootLayer = gameMc;
 			}
 			
 			/*

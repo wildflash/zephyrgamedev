@@ -1,0 +1,13 @@
+/* CSS file */
+
+.playButton {
+	up-skin: Embed(source='../buttons/play16_normal.png');
+	over-skin: Embed(source='../buttons/play16_over.png');
+	down-skin: Embed(source='../buttons/play16_normal.png');
+}
+
+.pauseButton {
+	up-skin: Embed(source='../buttons/pause16_normal.png');
+	over-skin: Embed(source='../buttons/pause16_over.png');
+	down-skin: Embed(source='../buttons/pause16_normal.png');
+}

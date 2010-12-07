@@ -66,9 +66,12 @@
 			</mx:AddChild>
 		</mx:State>
 	</mx:states>
+	
+<mx:Style source="../assets/css/stronghold.css" />
 
 <mx:Script>
 	<![CDATA[
+		import com.zephyr.game.GameSettings;
 		import com.zephyr.game.GameScreen;
 		import com.zephyr.utils.debug.CMemoryAndFps;
 		import mx.controls.Button;
@@ -87,6 +90,7 @@
 				this.rawChildren.addChild(new CMemoryAndFps());
 			}*/
 			
+			this.frameRate = GameSettings.getInstance().frameRate;
 			lm.init(new StrongholdLanguageData);
 			//trace(lm.getLangStr(4));
 			//this.currentState = "select language";

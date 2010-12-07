@@ -1,9 +1,10 @@
 package com.zephyr.game {
-	import flash.events.EventDispatcher;
 	
-	public class GameSettings extends EventDispatcher {
+	public class GameSettings extends Object {
 		
 		private static var instance:GameSettings = new GameSettings();
+		
+		public const frameRate:Number = 60;
 		
 		public function GameSettings():void {
 			if(instance) {

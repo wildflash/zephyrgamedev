@@ -12,7 +12,7 @@ package com.zephyr.managers
 		
 		private static var instance:FxManager = new FxManager()
 		
-		public var fxArray:ArrayCollection = new ArrayCollection();
+		private var fxArray:ArrayCollection = new ArrayCollection();
 		private var shaderTargets:ArrayCollection = new ArrayCollection();
 		
 		public function FxManager():void {

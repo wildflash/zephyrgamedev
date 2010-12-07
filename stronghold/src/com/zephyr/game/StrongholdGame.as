@@ -1,10 +1,7 @@
 package com.zephyr.game {
 	import com.actionsnippet.qbox.QuickBox2D;
-	import com.zephyr.events.GameEvent;
 	
 	import flash.display.MovieClip;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
 	
 	public class StrongholdGame extends Game {
 		
@@ -15,7 +12,6 @@ package com.zephyr.game {
 		private var gameData:GameData;
 		
 		private var phy:QuickBox2D;
-		private var stepNo:int;
 		
 		public function StrongholdGame(gameScreen:GameScreen, gameData:GameData):void {
 			this.gameScreen = gameScreen;
@@ -23,17 +19,18 @@ package com.zephyr.game {
 			
 			initPhysics(this.gameScreen.gameArea.gameMc);
 			gameScreen.gameArea.init(gameData.level.initialData);
-			start();
+			play();
 		}
 		
 		private function initPhysics(gameMc:MovieClip,params:Object=null):void {
 			this.phy = new QuickBox2D(gameMc,params);
-			this.phy.addEventListener("step", redispatchStep);
+			this.phy.addEventListener("step", dispatchStep);
 			this.stepNo = 0;
 		}
 		
-		private function start():void {
+		public function play():void {
 			this.phy.start();
+			this.playState = Game.PLAY;
 		}
 		
 		public function pause(type:Boolean=StrongholdGame.PAUSE_PHYSICS):void {
@@ -42,15 +39,12 @@ package com.zephyr.game {
 			} else {
 				
 			}
+			this.playState = Game.PAUSED;
 		}
 		
-		private function redispatchStep(e:Event):void {
-			this.stepNo++;
-			if(this.stepNo>100) this.stepNo = 0;
-			this.dispatchEvent(new GameEvent(GameEvent.STEP,this.stepNo));
+		public function initGame():void {
+			
 		}
-		
-		//public static function
 
 	}
 }

@@ -1,6 +1,6 @@
 package com.zephyr.game.levels {
 	
-	import com.zephyr.game.objects.BigGunPlatform;
+	import com.zephyr.game.objects.*;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -58,9 +58,9 @@ package com.zephyr.game.levels {
 				if(gon.indexOf("bigGunPlatform")>-1) {
 					temp = new BigGunPlatform();
 				} else if(gon.indexOf("gunPlatform")>-1) {
-					temp = new BigGunPlatform();
+					temp = new GunPlatform();
 				} else if(gon.indexOf("soldierPost")>-1) {
-					temp = new BigGunPlatform();
+					temp = new SoldierPost();
 				} else if(gon.indexOf("x")>-1) {
 					
 				} else if(gon.indexOf("x")>-1) {
