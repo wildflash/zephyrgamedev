@@ -23,7 +23,7 @@
 			public function init():void {
 				GameData.getInstance().levelNo = 1; //place this elsewhere
 				game = new StrongholdGame(this, GameData.getInstance());
-				//explosionTest();
+				explosionTest();
 			}
 			
 			private function explosionTest():void {
@@ -31,7 +31,7 @@
 				//var tempExp:Explosion = new Explosion(game, gameArea.fxMc, 200, 200, Explosion.MEDIUM_EXPLOSION, true, true, true);
 				
 				var explosionCount:int = 0;
-				var t:GameTimer = new GameTimer(game, 1000);
+				var t:GameTimer = new GameTimer(game, 1500);
 				t.addEventListener(GameTimerEvent.TIMER, function (event:GameTimerEvent):void {
 					explosionCount++;
 					if(explosionCount>15) {

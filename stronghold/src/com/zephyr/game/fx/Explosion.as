@@ -140,6 +140,7 @@ package com.zephyr.game.fx {
 		}
 		
 		override public function step(event:GameEvent):void {
+			if(int(event.params)%2==0) {
 			for(var i:int=0;i<explosionParticleAmount;i++) {
 				if(tempExplosion[i]) tempExplosion[i].nextFrame();
 				
@@ -147,6 +148,7 @@ package com.zephyr.game.fx {
 					if(tempFragments[i]) tempFragments[i].nextFrame();
 				}
 			}
+		}
 		}
 		
 		override public function destroy():void {
