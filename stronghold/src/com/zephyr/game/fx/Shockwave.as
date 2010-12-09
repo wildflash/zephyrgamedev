@@ -3,6 +3,7 @@ package com.zephyr.game.fx {
 	import com.zephyr.events.FxEvent;
 	import com.zephyr.events.GameEvent;
 	import com.zephyr.game.StrongholdGame;
+	import com.zephyr.game.assets.StrongholdGameAssets;
 	
 	import flash.display.Shader;
 	import flash.display.Sprite;
@@ -11,8 +12,8 @@ package com.zephyr.game.fx {
 	
 	public class Shockwave extends GameShaderFilterFx {
 		
-		[Embed("../../../../../assets/pixelbender/shockwave.pbj", mimeType="application/octet-stream")]
-		private var ShaderAsset:Class;
+		//assets
+		private var ShockwaveShaderClass:Class = StrongholdGameAssets.getInstance().ShockwaveShaderClass;
 		
 		private var shockwaveShader:Shader;
 		private var maxRadius:Number;
@@ -25,7 +26,7 @@ package com.zephyr.game.fx {
 			this.maxRadius = maxRadius;
 			super(game);
 			
-			shockwaveShader = new Shader(new ShaderAsset() as ByteArray);
+			shockwaveShader = new Shader(new ShockwaveShaderClass() as ByteArray);
 			shockwaveShader.data.position.value = [xPos,yPos];
 		}
 		

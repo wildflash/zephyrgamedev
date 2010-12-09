@@ -10,6 +10,7 @@ package com.zephyr.game.fx {
 	import com.zephyr.events.FxEvent;
 	import com.zephyr.events.GameEvent;
 	import com.zephyr.game.Game;
+	import com.zephyr.game.assets.StrongholdGameAssets;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -22,12 +23,10 @@ package com.zephyr.game.fx {
 		public static const MEDIUM_EXPLOSION:int = 3;
 		public static const BIG_EXPLOSION:int = 4;
 		private var preset:int;
-		
-		[Embed(source="../../../../../assets/stronghold.swf", symbol="explosion")]
-        private var ExplosionMc:Class;
         
-		[Embed(source="../../../../../assets/stronghold.swf", symbol="explosion2")]
-        private var ParticleMc:Class;
+        //assets
+        private var ExplosionMcClass:Class = StrongholdGameAssets.getInstance().ExplosionMcClass;
+        private var ParticleMcClass:Class = StrongholdGameAssets.getInstance().ParticleMcClass;
         
         //default explosion parameters
         private var explosionParticleAmount:Number = 15;
@@ -89,7 +88,7 @@ package com.zephyr.game.fx {
 				var randomNum:Number
 				
 				////create explosion bulb
-				tempExplosion[i] = new ExplosionMc() as MovieClip;
+				tempExplosion[i] = new ExplosionMcClass() as MovieClip;
 				if(useStepFunction) {
 					tempExplosion[i].stop();
 					
@@ -118,7 +117,7 @@ package com.zephyr.game.fx {
 				
 				if(explosionFragmentsOn) {
 					////create explosion fragments
-					tempFragments[i] = new ParticleMc() as MovieClip;
+					tempFragments[i] = new ParticleMcClass() as MovieClip;
 					if(useStepFunction) {
 						tempFragments[i].stop();
 					}
