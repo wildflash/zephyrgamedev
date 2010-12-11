@@ -29,14 +29,14 @@ package com.zephyr.game.levels {
 				if(area.name.indexOf("Area")>-1) {
 					if(area.name.indexOf("player")>-1) { // player area
 						ob.playerArea = new Object();
-						//create array of game objects per area (will be added to background)
+						//create array of game objects per area (will be added to game object layer)
 						if(!ob.playerArea.gameObjects) ob.playerArea.gameObjects = new Array();
 						for each(var go:Sprite in area) { //go = game object
 							mapTo(go,ob.playerArea);
 						}
 					} else { //enemy area
 						ob.enemyArea = new Object();
-						//create array of game objects per area (will be added to background)
+						//create array of game objects per area (will be added to game object layer)
 						if(!ob.enemyArea.gameObjects) ob.enemyArea.gameObjects = new Array();
 						for each(go in area) {
 							mapTo(go,ob.enemyArea);
@@ -70,7 +70,7 @@ package com.zephyr.game.levels {
 				} else {
 					temp = new BigGunPlatform();
 				}
-				temp.x = gameObject.x;
+				temp.x = gameObject.x ;
 				temp.y = gameObject.y;
 				temp.rotation = gameObject.rotation;
 				area.gameObjects.push(temp);

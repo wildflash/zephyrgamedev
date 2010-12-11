@@ -23,7 +23,7 @@
 			public function init():void {
 				GameData.getInstance().levelNo = 1; //place this elsewhere
 				game = new StrongholdGame(this, GameData.getInstance());
-				explosionTest();
+				//explosionTest();
 			}
 			
 			private function explosionTest():void {

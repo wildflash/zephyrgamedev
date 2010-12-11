@@ -4,7 +4,7 @@
 	frameRate="60"
 	layout="absolute"
 	preloader="com.zephyr.game.preloader.StrongholdPreloader"
-	creationComplete="init(true)" xmlns:ns1="com.zephyr.game.*">
+	applicationComplete="init(true)" xmlns:ns1="com.zephyr.game.*">
 	<mx:states>
 		<mx:State name="menu">
 			<mx:AddChild position="lastChild">

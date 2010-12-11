@@ -1,5 +1,6 @@
 package com.zephyr.managers
 {
+	import flash.display.Sprite;
 	import flash.events.EventDispatcher;
 
 	public class DisplayManager extends EventDispatcher
@@ -20,7 +21,7 @@ package com.zephyr.managers
 		public var rootLayer:Object;
 		
 		public var bgLayer:Object;
-		public var gameObjectLayer:Object;
+		public var gameObjectLayer:Sprite;
 		public var fxLayer:Object;
 		public var statisticsLayer:Object;
 		public var buttonsLayer:Object;

@@ -11,34 +11,39 @@
 			private var levelData:Object;
 			public var gameMc:MovieClip = new MovieClip();
 			public var bgMc:MovieClip = new MovieClip();
+			public var gameObjectMc:MovieClip = new MovieClip();
 			public var fxMc:MovieClip = new MovieClip();
 			
 			public function init(levelData:Object):void {
 				this.levelData = levelData;
+				bgMc.x -= 10; bgMc.y -= 10;
+				gameObjectMc.x -= 10; gameObjectMc.y -= 10;
 				gameMc.addChild(bgMc);
+				gameMc.addChild(gameObjectMc);
 				gameMc.addChild(fxMc);
 				this.rawChildren.addChild(gameMc);
 				initDisplayManager();
-				draw();
+				drawLevel();
 			}
 			
 			public function initDisplayManager():void {
-				DisplayManager.getInstance().bgLayer = bgMc;
-				DisplayManager.getInstance().fxLayer = fxMc;
 				DisplayManager.getInstance().rootLayer = gameMc;
+				DisplayManager.getInstance().bgLayer = bgMc;
+				DisplayManager.getInstance().gameObjectLayer = gameObjectMc;
+				DisplayManager.getInstance().fxLayer = fxMc;
 			}
 			
 			/*
 			draw game visual
 			*/
-			public function draw():void {
+			public function drawLevel():void {
 				//put background
 				//gameMc.source = levelData.playerArea.bg;
 				bgMc.addChild(levelData.playerArea.bg);
 				
 				//put game objects
 				for each(var go:Sprite in levelData.playerArea.gameObjects) {
-					bgMc.addChild(go);
+					gameObjectMc.addChild(go);
 				}
 			}
 			
