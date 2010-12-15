@@ -4,7 +4,7 @@ package com.zephyr.game {
 		
 		private static var instance:GameSettings = new GameSettings();
 		
-		public const frameRate:Number = 60;
+		public const frameRate:uint = 60;
 		
 		public function GameSettings():void {
 			if(instance) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="75" height="75" borderStyle="none" cornerRadius="8" borderThickness="2" borderColor="#B7AB20" backgroundColor="#000000" backgroundAlpha="0.0">
+	<mx:Image id="thumbImage" source="{data.thumbImage}" mask="{imageMask}" width="75" height="75" horizontalCenter="0" verticalCenter="0" scaleContent="false" autoLoad="true" horizontalAlign="center" verticalAlign="middle"/>
+	<mx:Canvas width="75" height="75" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0" backgroundAlpha="0.0"/>
+	<mx:Canvas id="imageMask" width="75" height="75" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0"/>
+	<mx:Script>
+		<![CDATA[
+			
+			override public function set data(value:Object):void {
+				super.data = value;
+			}
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>
