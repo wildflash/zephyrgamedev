@@ -4,6 +4,7 @@ package com.zephyr.game.levels {
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	
 	import mx.utils.ObjectProxy;
 	
@@ -74,6 +75,10 @@ package com.zephyr.game.levels {
 				temp.y = gameObject.y;
 				temp.rotation = gameObject.rotation;
 				area.gameObjects.push(temp);
+				
+				//var p:Point = new Point(temp.x,temp.y);
+				//p = temp.globalToLocal(p);
+				//trace('position ('+p.x+','+p.y+')');
 			} 
 			
 		}
