@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="75" height="75" borderStyle="none" cornerRadius="8" borderThickness="2" borderColor="#B7AB20" backgroundColor="#000000" backgroundAlpha="0.0">
-	<mx:Image id="thumbImage" source="{data.thumbImage}" mask="{imageMask}" width="75" height="75" horizontalCenter="0" verticalCenter="0" scaleContent="false" autoLoad="true" horizontalAlign="center" verticalAlign="middle"/>
-	<mx:Canvas width="75" height="75" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0" backgroundAlpha="0.0"/>
-	<mx:Canvas id="imageMask" width="75" height="75" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0"/>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="70" height="70" borderStyle="none" cornerRadius="8" borderThickness="2" borderColor="#B7AB20" backgroundColor="#000000" backgroundAlpha="0.0" buttonMode="false">
+	<mx:Canvas width="70" height="70" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0" backgroundAlpha="1.0" backgroundColor="#FFFFFF"/>
+	<mx:Image id="thumbImage" source="{thumbSource}" mask="{imageMask}" width="70" height="70" horizontalCenter="0" verticalCenter="0" scaleContent="false" autoLoad="true" horizontalAlign="center" verticalAlign="middle" buttonMode="true"/>
+	<mx:Canvas id="imageMask" width="70" height="70" borderStyle="solid" borderThickness="2" cornerRadius="8" borderColor="#00F6FF" horizontalCenter="0" verticalCenter="0"/>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.game.assets.StrongholdGameAssets;
+			import com.zephyr.game.interfaces.IGun;
+			
+			[Bindable]
+			private var thumbSource:Object;
 			
 			override public function set data(value:Object):void {
 				super.data = value;
+				this.thumbSource = getThumbSource(data.gun);
+			}
+			
+			private function getThumbSource(gun:Object):Object {
+				var imgClass:Class = StrongholdGameAssets.getInstance().MachineGunIconClass;
+				return new imgClass;
 			}
 			
 		]]>

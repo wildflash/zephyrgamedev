@@ -1,13 +1,12 @@
 package com.zephyr.game.abstracts
 {
-	import com.actionsnippet.qbox.QuickBox2D;
-	import com.actionsnippet.qbox.QuickObject;
 	import com.zephyr.events.GameEvent;
+	import com.zephyr.events.GameObjectEvent;
 	import com.zephyr.game.Game;
 	import com.zephyr.game.interfaces.IGun;
 	import com.zephyr.game.interfaces.IGunPlatform;
-	import com.zephyr.game.interfaces.IPhysicsObject;
 	import com.zephyr.interfaces.IGameObject;
+	import com.zephyr.managers.InputManager;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -73,7 +72,7 @@ package com.zephyr.game.abstracts
 		}*/
 		
 		public function onClick(event:MouseEvent):void {
-				
+			InputManager.getInstance().dispatchEvent(new GameObjectEvent(GameObjectEvent.GAME_OBJECT_CLICKED,this));
 		}
 		
 	}

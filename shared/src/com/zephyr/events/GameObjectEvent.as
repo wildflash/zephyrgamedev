@@ -6,6 +6,7 @@ package com.zephyr.events
 	{
 		
 		public static const REMOVE_GAME_OBJECT:String = "remove game object";
+		public static const GAME_OBJECT_CLICKED:String = "game object clicked";
 		
 		public var params:Object;
 		

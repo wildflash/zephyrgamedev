@@ -2,7 +2,7 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="800" height="100">
 	<mx:states>
 		<mx:State name="detail">
-			<mx:RemoveChild target="{weaponList}"/>
+			<mx:RemoveChild target="{gunList}"/>
 			<mx:RemoveChild target="{titleLabel}"/>
 		</mx:State>
 	</mx:states>
@@ -17,7 +17,7 @@
 	</mx:Canvas>
 	<mx:Canvas y="0" width="550" height="100" horizontalCenter="0" backgroundColor="#A3A3A3">
 		<mx:Canvas width="545" height="95" horizontalCenter="0" verticalCenter="0" backgroundColor="#000000" id="mainCanvas">
-			<mx:List id="weaponList" itemRenderer="com.zephyr.game.components.GunIcon" width="520" height="75" bottom="3" horizontalCenter="0" dataProvider="{weaponArray}"></mx:List>
+			<mx:List id="gunList" itemRenderer="com.zephyr.game.components.GunIcon" width="520" height="75" bottom="3" horizontalCenter="0" dataProvider="{gunArray}" backgroundColor="#000000" borderStyle="none" rowHeight="75" verticalAlign="middle" allowMultipleSelection="false" editable="false" verticalScrollPolicy="off" horizontalScrollPolicy="off" selectionColor="#000000" rollOverColor="#000000"></mx:List>
 			<mx:Label y="0" text="Available Weapons" color="#00D2FF" horizontalCenter="0" fontWeight="bold" width="164" textAlign="center" id="titleLabel"/>
 		</mx:Canvas>
 	</mx:Canvas>
@@ -26,7 +26,7 @@
 			import mx.collections.ArrayCollection;
 			
 			[Bindable]
-			public var weaponArray:ArrayCollection;
+			public var gunArray:ArrayCollection;
 			
 		]]>
 	</mx:Script>

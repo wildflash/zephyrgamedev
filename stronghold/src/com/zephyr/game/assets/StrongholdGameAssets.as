@@ -18,7 +18,8 @@ package com.zephyr.game.assets
 			return instance;
 		}
 		
-		//assets sources
+		////assets sources
+		//fx
 		[Embed(source="../../../../../assets/stronghold.swf", symbol="explosion")]
         public var ExplosionMcClass:Class;
         
@@ -27,6 +28,10 @@ package com.zephyr.game.assets
         
         [Embed("../../../../../assets/pixelbender/shockwave.pbj", mimeType="application/octet-stream")]
 		public var ShockwaveShaderClass:Class;
+		
+		//icons
+		[Embed("../../../../../assets/bitmap/icons/machine_gun_thumb75.png")]
+		public var MachineGunIconClass:Class;
 		
 	}
 }

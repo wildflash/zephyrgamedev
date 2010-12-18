@@ -20,11 +20,11 @@ package com.zephyr.game.objects
 			super();
 		}
 		
-		override public function onClick(event:MouseEvent):void {
-				
+		/*override public function onClick(event:MouseEvent):void {
+			
 		}
 		
-		/*override public function applyPhysics(phy:QuickBox2D):void {
+		override public function applyPhysics(phy:QuickBox2D):void {
 			this.phy = phy;
 			var rotation:Number = this.rotation;
 			this.rotation = 0;
