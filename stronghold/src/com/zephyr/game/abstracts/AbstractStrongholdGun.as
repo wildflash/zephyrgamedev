@@ -81,7 +81,7 @@ package com.zephyr.game.abstracts
 			_baseMinRange = value;
 		}
 		public function get baseMinRange():uint {
-			return baseMinRange;
+			return _baseMinRange;
 		}
 		
 		private var _baseMaxRange:uint;

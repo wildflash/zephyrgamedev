@@ -1,18 +1,21 @@
 package com.zephyr.game {
 	import com.actionsnippet.qbox.QuickBox2D;
 	import com.zephyr.events.GameObjectEvent;
-	import com.zephyr.game.interfaces.IGun;
+	import com.zephyr.game.events.StrongholdGameEvent;
 	import com.zephyr.game.interfaces.IGunPlatform;
 	import com.zephyr.game.interfaces.IPhysicsObject;
 	import com.zephyr.managers.DisplayManager;
 	import com.zephyr.managers.InputManager;
 	
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	
 	import mx.collections.ArrayCollection;
 	import mx.utils.ObjectProxy;
 	
 	public class StrongholdGame extends Game {
+		
+		private static var instance:StrongholdGame = new StrongholdGame(); 
 		
 		public static const PAUSE_PHYSICS:Boolean = false;
 		public static const PAUSE_DAMAGE:Boolean = true;
@@ -24,7 +27,17 @@ package com.zephyr.game {
 		
 		private var phy:QuickBox2D;
 		
-		public function StrongholdGame(gameScreen:GameScreen, gameData:GameData):void {
+		public function StrongholdGame():void {
+			if(instance) {
+				throw new Error("It is a Singleton and can only be accessed through Singleton.getInstance()");
+			}
+		}
+		
+		public static function getInstance():StrongholdGame {
+			return instance;
+		}
+		
+		public function init(gameScreen:GameScreen, gameData:GameData):void {
 			this.gameScreen = gameScreen;
 			this.gameData = gameData;
 			
@@ -36,6 +49,8 @@ package com.zephyr.game {
 		
 		private function initListeners():void {
 			im.addEventListener(GameObjectEvent.GAME_OBJECT_CLICKED, gameObjectClicked);
+			im.addEventListener(StrongholdGameEvent.BACKGROUND_CLICKED, backgroundClicked);
+			this.addEventListener(StrongholdGameEvent.BUILD_DEFENSE, buildDefense);
 		}
 		
 		private function gameObjectClicked(event:GameObjectEvent):void {
@@ -44,12 +59,14 @@ package com.zephyr.game {
 				if(go.installedGun==null) {
 					//show available guns can be built
 					//trace("gun platform clicked");
+					this.gameScreen.gameBar.currentState = 'build';
 					var gunArr:ArrayCollection = new ArrayCollection();
 					for each(var gun1:Object in gameData.level.arsenal) {
 						for each(var gun2:Object in IGunPlatform(go).compatibleGuns) {
 							if(gun1==gun2) {
 								var ob:Object = new ObjectProxy();
 								ob.gun = gun1;
+								ob.platform = go;
 								gunArr.addItem(ob);
 							}
 						}
@@ -59,6 +76,17 @@ package com.zephyr.game {
 					//trace("gun clicked");
 				}
 			}
+		}
+		
+		private function backgroundClicked(event:StrongholdGameEvent):void {
+			this.gameScreen.gameBar.currentState = '';
+		}
+		
+		private function buildDefense(event:StrongholdGameEvent):void {
+			var platform:Sprite = Sprite(event.params.platform);
+			var gunClass:Class = event.params.gun;
+			var gun:Sprite = new gunClass(this);
+			platform.addChild(gun);
 		}
 		
 		private function initPhysics(gameMc:MovieClip,params:Object=null):void {

@@ -14,6 +14,7 @@ package com.zephyr.game.objects
         
 		public function GunPlatform():void {
 			this.addChild(new AssetClass());
+			this.opaqueBackground = true;
 			
 			this.compatibleGuns = [MachineGun]
 			

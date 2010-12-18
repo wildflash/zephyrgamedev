@@ -17,12 +17,12 @@
 			import com.zephyr.game.fx.Explosion;
 			
 			[Bindable]
-			private var game:StrongholdGame;
+			private var game:StrongholdGame = StrongholdGame.getInstance();
 			private var gs:GameSettings = GameSettings.getInstance();
 			
 			public function init():void {
 				GameData.getInstance().levelNo = 1; //place this elsewhere
-				game = new StrongholdGame(this, GameData.getInstance());
+				game.init(this, GameData.getInstance());
 				//explosionTest();
 			}
 			

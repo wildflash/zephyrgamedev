@@ -13,6 +13,7 @@ package com.zephyr.game.objects.gun
 		
 		public function MachineGun(game:Game):void {
 			this.addChild(new AssetClass());
+			this.opaqueBackground = true;
 			
 			this.level = 1;
 			this.exp = 0;

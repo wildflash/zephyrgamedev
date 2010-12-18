@@ -4,6 +4,8 @@
 	<mx:Label text="Game Area" verticalCenter="0" horizontalCenter="0"/>
 	<mx:Script>
 		<![CDATA[
+			import com.zephyr.game.events.StrongholdGameEvent;
+			import com.zephyr.managers.InputManager;
 			import com.zephyr.managers.DisplayManager;
 			import com.zephyr.utils.debug.CMemoryAndFps;
 			import com.zephyr.game.GameData;
@@ -24,6 +26,10 @@
 				this.rawChildren.addChild(gameMc);
 				initDisplayManager();
 				drawLevel();
+				
+				bgMc.addEventListener(MouseEvent.CLICK, function bgClicked(event:MouseEvent):void {
+					InputManager.getInstance().dispatchEvent(new StrongholdGameEvent(StrongholdGameEvent.BACKGROUND_CLICKED));
+				});
 			}
 			
 			public function initDisplayManager():void {
