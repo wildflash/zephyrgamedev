@@ -1,6 +1,7 @@
 package com.zephyr.game {
 	import com.actionsnippet.qbox.QuickBox2D;
 	import com.zephyr.events.GameObjectEvent;
+	import com.zephyr.events.GameTimerEvent;
 	import com.zephyr.game.events.StrongholdGameEvent;
 	import com.zephyr.game.interfaces.IGunPlatform;
 	import com.zephyr.game.interfaces.IPhysicsObject;
@@ -27,6 +28,14 @@ package com.zephyr.game {
 		
 		private var phy:QuickBox2D;
 		
+		private var elapsedTime:Date;
+		[Bindable]
+		public var elapsedTimeString:String = "00:00:00";
+		[Bindable]
+		public var totalKills:uint = 0;
+		[Bindable]
+		public var unitsLoss:uint = 0;
+		
 		public function StrongholdGame():void {
 			if(instance) {
 				throw new Error("It is a Singleton and can only be accessed through Singleton.getInstance()");
@@ -45,6 +54,16 @@ package com.zephyr.game {
 			initPhysics(this.gameScreen.gameArea.gameMc);
 			initLevel();
 			play();
+			
+			//elapsed time
+			this.elapsedTime = new Date(null,0,0,0,0,0);
+			var t:GameTimer = new GameTimer(this,1000);
+			t.addEventListener(GameTimerEvent.TIMER, function onTimer(event:GameTimerEvent):void {
+				elapsedTime.seconds++;
+				elapsedTimeString = elapsedTime.toTimeString().slice(0,8);
+				//trace(elapsedTime.toTimeString());
+			});
+			t.start();
 		}
 		
 		private function initListeners():void {
