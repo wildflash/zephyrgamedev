@@ -3,6 +3,7 @@ package com.zephyr.game {
 	import com.zephyr.events.GameObjectEvent;
 	import com.zephyr.events.GameTimerEvent;
 	import com.zephyr.game.events.StrongholdGameEvent;
+	import com.zephyr.game.interfaces.IGun;
 	import com.zephyr.game.interfaces.IGunPlatform;
 	import com.zephyr.game.interfaces.IPhysicsObject;
 	import com.zephyr.managers.DisplayManager;
@@ -93,6 +94,7 @@ package com.zephyr.game {
 					this.gameScreen.gameBar.gunArray = gunArr;
 				} else {
 					//trace("gun clicked");
+					this.gameScreen.gameBar.currentState = 'detail';
 				}
 			}
 		}
@@ -102,10 +104,13 @@ package com.zephyr.game {
 		}
 		
 		private function buildDefense(event:StrongholdGameEvent):void {
-			var platform:Sprite = Sprite(event.params.platform);
+			var platform:Object = event.params.platform;
 			var gunClass:Class = event.params.gun;
-			var gun:Sprite = new gunClass(this);
-			platform.addChild(gun);
+			var gun:Object = new gunClass(this);
+			platform.installedGun = gun;
+			platform.addChild(Sprite(gun));
+			IGun(gun).gunPlatform = IGunPlatform(platform);
+			this.gameScreen.gameBar.currentState = "detail";
 		}
 		
 		private function initPhysics(gameMc:MovieClip,params:Object=null):void {

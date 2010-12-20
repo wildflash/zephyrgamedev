@@ -1,6 +1,9 @@
 package com.zephyr.game.objects.gun
 {
+	import com.zephyr.events.GameEvent;
+	import com.zephyr.events.GameTimerEvent;
 	import com.zephyr.game.Game;
+	import com.zephyr.game.GameTimer;
 	import com.zephyr.game.abstracts.AbstractStrongholdGun;
 	import com.zephyr.game.interfaces.guntype.IPiercing;
 
@@ -12,8 +15,10 @@ package com.zephyr.game.objects.gun
         private var AssetClass:Class;
 		
 		public function MachineGun(game:Game):void {
+			super(game);
+			
 			this.addChild(new AssetClass());
-			this.opaqueBackground = true;
+			//this.opaqueBackground = true;
 			
 			this.level = 1;
 			this.exp = 0;
@@ -36,8 +41,30 @@ package com.zephyr.game.objects.gun
 			this.accuracy = this.baseAccuracy;
 			this.fireRate = this.baseFireRate;
 			this.rotationSpeed = this.baseRotationSpeed;
-			
-			super(game);
+		}
+		
+		private var gunTimer:GameTimer;
+		override public function set state(value:uint):void {
+			_state = value;
+			if(state==GunState.IDLE) {
+				gunTimer = new GameTimer(game,100);
+				gunTimer.addEventListener(GameTimerEvent.TIMER, idle);
+				gunTimer.start();
+			}
+		}
+		
+		private var mult:int = 1
+		private function idle(event:GameTimerEvent):void {
+			this.rotation+= mult;
+			if(this.rotation > this.maxAngle/2) mult = -1;
+			if(this.rotation < -this.maxAngle/2) mult = 1;
+		}
+		
+		override public function step(event:GameEvent):void {
+			var stepNo:int = int(event.params);
+			if(this.state==GunState.IDLE) {
+				
+			}
 		}
 		
 		override public function fire():void {

@@ -3,6 +3,7 @@ package com.zephyr.game.abstracts
 	import com.zephyr.events.GameEvent;
 	import com.zephyr.game.Game;
 	import com.zephyr.game.interfaces.IGun;
+	import com.zephyr.game.interfaces.IGunPlatform;
 	import com.zephyr.game.interfaces.guntype.IGunType;
 	import com.zephyr.interfaces.IGameObject;
 	
@@ -11,7 +12,7 @@ package com.zephyr.game.abstracts
 	public class AbstractStrongholdGun extends Sprite implements IGun, IGameObject
 	{
 		
-		private var game:Game;
+		public var game:Game;
 		
 		public function AbstractStrongholdGun(game:Game):void {
 			this.game = game;
@@ -19,7 +20,15 @@ package com.zephyr.game.abstracts
 			super();
 		}
 		
-		private var _level:uint
+		private var _gunPlatform:IGunPlatform;
+		public function set gunPlatform(value:IGunPlatform):void {
+			_gunPlatform = value
+		}
+		public function get gunPlatform():IGunPlatform {
+			return _gunPlatform;
+		}
+		
+		private var _level:uint;
 		public function set level(value:uint):void {
 			_level = value
 		}
@@ -43,7 +52,7 @@ package com.zephyr.game.abstracts
 			return _kills;
 		}
 		
-		private var _state:uint;
+		public var _state:uint;
 		public function set state(value:uint):void {
 			_state = value;
 		}

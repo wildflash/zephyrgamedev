@@ -8,6 +8,45 @@
 			<mx:RemoveChild target="{label3}"/>
 			<mx:RemoveChild target="{unitsLossLabel}"/>
 			<mx:RemoveChild target="{totalKillsLabel}"/>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Image x="10" y="8" width="77" height="77" autoLoad="true" scaleContent="false" horizontalAlign="center" verticalAlign="middle"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="98" y="10" text="Level" color="#FFFFFF" fontWeight="bold"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="134" y="10" text="1" color="#FFFFFF" fontWeight="bold" width="34" id="levelLabel"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="98" y="27" text="Experience:" color="#FFFFFF" fontWeight="normal"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="170" y="27" text="10000" color="#00F6FF" fontWeight="normal" id="expLabel" width="46"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="236" y="27" text="Next level:" color="#FFFFFF" fontWeight="normal"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="300" y="27" text="99999" color="#00F6FF" fontWeight="normal" id="nextExpLabel" width="49"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="368" y="27" text="Kills:" color="#FFFFFF" fontWeight="normal"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="398" y="27" text="999" color="#00F6FF" fontWeight="normal" id="killsLabel" width="41"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Button x="458" y="8" label="Upgrade" height="77" width="77"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Label x="98" y="41" text="HP" color="#FFFFFF" fontWeight="normal"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">
+				<mx:Canvas x="122" y="44" width="300" height="10" backgroundColor="#FF3838" borderStyle="solid" borderThickness="1">
+					<mx:Canvas x="0" y="0" width="200" height="10" backgroundColor="#59FF4C" borderStyle="solid" borderThickness="1">
+					</mx:Canvas>
+				</mx:Canvas>
+			</mx:AddChild>
 		</mx:State>
 		<mx:State name="build">
 			<mx:AddChild relativeTo="{mainCanvas}" position="lastChild">

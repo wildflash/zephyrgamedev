@@ -4,6 +4,10 @@ package com.zephyr.game.interfaces
 	
 	public interface IGun
 	{
+		
+		function set gunPlatform(value:IGunPlatform):void;
+		function get gunPlatform():IGunPlatform;
+		
 		function set level(value:uint):void;
 		function get level():uint;
 		function set exp(value:Number):void;
